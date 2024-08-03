@@ -20,51 +20,51 @@ class App extends React.Component {
     this.getSession();
   }
 
-// Get Session Method
+  // Get Session Method
   getSession = () => {
     //// Make a GET request to the "/api/session/" URL with "same-origin" credentials
-    fetch("/api/session/", {
+    fetch("http://127.0.0.1:8000/api/session/", {
       credentials: "same-origin",
     })
-    .then((res) => res.json()) //// Parse the response as JSON
-    .then((data) => {
-      console.log(data); // Log the response data to the console
-      //// If the response indicates the user is authenticated
-      if (data.isAuthenticated) {
-        this.setState({isAuthenticated: true}); // Update the component's state
-      } else {  // If the response indicates the user is not authenticated
-        this.setState({isAuthenticated: false}); // Update the component's state
-      }
-    })
+      .then((res) => res.json()) //// Parse the response as JSON
+      .then((data) => {
+        console.log(data); // Log the response data to the console
+        //// If the response indicates the user is authenticated
+        if (data.isAuthenticated) {
+          this.setState({ isAuthenticated: true }); // Update the component's state
+        } else {  // If the response indicates the user is not authenticated
+          this.setState({ isAuthenticated: false }); // Update the component's state
+        }
+      })
       //// Handle any errors that occurred during the fetch
-    .catch((err) => {
-      console.log(err);
-    });
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  
-//Who Am I method
+
+  //Who Am I method
   whoami = () => {
-    fetch("/api/whoami/", {
+    fetch("http://127.0.0.1:8000/api/whoami/", {
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "same-origin",
     })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("You are logged in as: " + data.username);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("You are logged in as: " + data.username);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   handlePasswordChange = (event) => {
-    this.setState({password: event.target.value});
+    this.setState({ password: event.target.value });
   }
 
   handleUserNameChange = (event) => {
-    this.setState({username: event.target.value});
+    this.setState({ username: event.target.value });
   }
 
   isResponseOk(response) {
@@ -78,40 +78,40 @@ class App extends React.Component {
   //Login Mthod
   login = (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
-     // Make a POST request to the "/api/login/" URL with the form data
-    fetch("/api/login/", {
+    // Make a POST request to the "/api/login/" URL with the form data
+    fetch("http://127.0.0.1:8000/api/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-CSRFToken": cookies.get("csrftoken"),
       },
       credentials: "same-origin",
-      body: JSON.stringify({username: this.state.username, password: this.state.password}),
+      body: JSON.stringify({ username: this.state.username, password: this.state.password }),
     })
-    .then(this.isResponseOk)
-    .then((data) => {
-      console.log(data);
-      this.setState({isAuthenticated: true, username: "", password: "", error: ""});
-    })
-    .catch((err) => {
-      console.log(err);
-      this.setState({error: "Wrong username or password."});
-    });
+      .then(this.isResponseOk)
+      .then((data) => {
+        console.log(data);
+        this.setState({ isAuthenticated: true, username: "", password: "", error: "" });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ error: "Wrong username or password." });
+      });
   }
 
   //Logout Method
   logout = () => {
-    fetch("/api/logout", {
+    fetch("http://127.0.0.1:8000/api/logout", {
       credentials: "same-origin",
     })
-    .then(this.isResponseOk)
-    .then((data) => {
-      console.log(data);
-      this.setState({isAuthenticated: false});
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then(this.isResponseOk)
+      .then((data) => {
+        console.log(data);
+        this.setState({ isAuthenticated: false });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
 
