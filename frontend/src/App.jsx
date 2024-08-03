@@ -25,12 +25,11 @@ class App extends React.Component {
     fetch("http://127.0.0.1:8000/api/session/", {
       credentials: "same-origin",
     })
-      .then((res) => res.json()) //// Parse the response as JSON
+      .then((res) => res.json())
       .then((data) => {
-        console.log(data); // Log the response data to the console
-        //// If the response indicates the user is authenticated
+        console.log(data);
         if (data.isAuthenticated) {
-          this.setState({ isAuthenticated: true }); // Update the component's state
+          this.setState({ isAuthenticated: true });
         } else {  // If the response indicates the user is not authenticated
           this.setState({ isAuthenticated: false }); // Update the component's state
         }
