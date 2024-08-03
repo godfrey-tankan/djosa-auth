@@ -75,7 +75,6 @@ class App extends React.Component {
   //Login Mthod
   login = (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
-    // Make a POST request to the "/api/login/" URL with the form data
     fetch("http://127.0.0.1:8000/api/login/", {
       method: "POST",
       headers: {
