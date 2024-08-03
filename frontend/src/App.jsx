@@ -34,7 +34,6 @@ class App extends React.Component {
           this.setState({ isAuthenticated: false }); // Update the component's state
         }
       })
-      //// Handle any errors that occurred during the fetch
       .catch((err) => {
         console.log(err);
       });
