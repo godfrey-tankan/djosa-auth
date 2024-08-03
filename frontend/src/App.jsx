@@ -22,7 +22,6 @@ class App extends React.Component {
 
   // Get Session Method
   getSession = () => {
-    //// Make a GET request to the "/api/session/" URL with "same-origin" credentials
     fetch("http://127.0.0.1:8000/api/session/", {
       credentials: "same-origin",
     })
